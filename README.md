@@ -35,3 +35,10 @@ Dealing with UTF-16 files by hand means tripping over BOMs: a file may carry one
 `BOM_LE`, `BOM_BE`, `hasBom`, `hasBomLE`, `hasBomBE`, `stripBom`, `addBomLE`, `addBomBE`, `swapByteOrder`, `toUTF16LE`, `toUTF16BE`.
 
 Run the tests with `node --test`.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
